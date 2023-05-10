@@ -1,0 +1,36 @@
+swagger: '2.0'
+info:
+  title: OCR API
+  description: API for OCR (Optical Character Recognition)
+  version: 1.0.0
+paths:
+  /computervision/imageanalysis:analyze:
+    post:
+      summary: Analyze Image
+      consumes:
+        - application/octet-stream
+      parameters:
+        - name: image
+          in: body
+          required: true
+          schema:
+            type: string
+            format: binary
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              readResult:
+                type: object
+                properties:
+                  content:
+                    type: string
+      x-code-samples:
+        - lang: csharp
+          source: |
+            curl --location --request POST 'https://test123cv.cognitiveservices.azure.com/computervision/imageanalysis:analyze' \
+            --header 'Ocp-Apim-Subscription-Key: {subscriptionKey}' \
+            --header 'Content-Type: application/octet-stream' \
+            --data-binary '@image.jpg'
